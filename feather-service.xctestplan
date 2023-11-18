@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "D2485B9B-88F5-4BD1-BC41-312973C13901",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "FeatherServiceTests",
+        "name" : "FeatherServiceTests"
+      }
+    }
+  ],
+  "version" : 1
+}
