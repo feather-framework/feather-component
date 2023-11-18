@@ -4,14 +4,16 @@ The `FeatherService` library provides a basic mechanism to manage various Feathe
 
 ## Getting started
 
-TODO 
+⚠️ This repository is a work in progress, things can break until it reaches v1.0.0. 
+
+Use at your own risk.
 
 ### Adding the dependency
 
 To add a dependency on the package, declare it in your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/feather-framework/feather-service.git", from: "1.0.0"),
+.package(url: "https://github.com/feather-framework/feather-service.git", .upToNextMinor(from: "0.1.0")),
 ```
 
 and to your application target, add `FeatherService` to your dependencies:
@@ -29,7 +31,7 @@ import PackageDescription
 let package = Package(
     name: "my-application",
     dependencies: [
-        .package(url: "https://github.com/feather-framework/feather-service.git", from: "1.0.0"),
+        .package(url: "https://github.com/feather-framework/feather-service.git", .upToNextMinor(from: "0.1.0")),
     ],
     targets: [
         .target(name: "MyApplication", dependencies: [
