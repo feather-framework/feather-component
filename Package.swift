@@ -4,7 +4,10 @@ import PackageDescription
 let package = Package(
     name: "feather-service",
     platforms: [
-        .macOS(.v10_15)
+        .macOS(.v13),
+        .iOS(.v16),
+        .tvOS(.v16),
+        .watchOS(.v9)
     ],
     products: [
         .library(name: "FeatherService", targets: ["FeatherService"]),
