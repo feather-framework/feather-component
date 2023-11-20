@@ -2,7 +2,7 @@
 //  ServiceRegistry.swift
 //  FeatherService
 //
-//  Created by Tibor Bodecs on 18/11/2023.
+//  Created by Tibor Bödecs on 18/11/2023.
 //
 
 import Logging
@@ -10,13 +10,13 @@ import Logging
 public final actor ServiceRegistry {
 
     private struct State {
-        let id: ServiceID
+        let id: any ServiceID
         let context: ServiceContext
         var driver: ServiceDriver?
     }
 
     private var isInActiveState: Bool
-    private var states: [ServiceID: State]
+    private var states: [String: State]
     private var logger: Logger
 
     public init(
@@ -39,8 +39,8 @@ public final actor ServiceRegistry {
 /// manage all services at once
 public extension ServiceRegistry {
 
-    func serviceIdentifiers() -> Set<ServiceID> {
-        .init(states.keys)
+    func serviceIdentifiers() -> [any ServiceID] {
+        states.keys.compactMap { states[$0]?.id }
     }
 
     func isActive() -> Bool {
@@ -70,29 +70,29 @@ public extension ServiceRegistry {
 
     /// check if a service exists
     func exists(
-        _ id: ServiceID
+        _ id: any ServiceID
     ) -> Bool {
-        states[id] != nil
+        states[id.rawId] != nil
     }
 
     /// add a service, if exists, it'll shutdown and remove old one
     func add(
-        _ contextFactory: ServiceContextFactory,
-        as id: ServiceID
+        _ contextWrapper: ServiceContextWrapper,
+        id: any ServiceID
     ) async throws {
-        try remove(id)
-        states[id] = .init(
+        try await remove(id)
+        states[id.rawId] = .init(
             id: id,
-            context: try contextFactory.build()
+            context: try contextWrapper.unwrap()
         )
     }
 
     /// remove a service, also shutdown before remove
     func remove(
-        _ id: ServiceID
-    ) throws {
+        _ id: any ServiceID
+    ) async throws {
         try shutdown(id)
-        states[id] = nil
+        states[id.rawId] = nil
     }
 }
 
@@ -101,9 +101,9 @@ public extension ServiceRegistry {
 
     /// check if a service is active or not
     func isActive(
-        _ id: ServiceID
+        _ id: any ServiceID
     ) -> Bool {
-        if let state = states[id] {
+        if let state = states[id.rawId] {
             return state.driver != nil
         }
         return false
@@ -111,36 +111,35 @@ public extension ServiceRegistry {
 
     /// start an inactive service
     func run(
-        _ id: ServiceID
+        _ id: any ServiceID
     ) async throws {
-        guard let state = states[id], state.driver == nil else {
+        guard let state = states[id.rawId], state.driver == nil else {
             return
         }
-        states[id]!.driver = try state.context.createDriver()
+        states[id.rawId]!.driver = try state.context.createDriver()
         isInActiveState = isActive()
     }
 
     /// stop an active service
     func shutdown(
-        _ id: ServiceID
+        _ id: any ServiceID
     ) throws {
-        if let state = states[id] {
+        if let state = states[id.rawId] {
             try state.driver?.shutdown()
-            states[id]!.driver = nil
+            states[id.rawId]!.driver = nil
         }
         self.isInActiveState = isActive()
     }
 
     /// returns the service if it's active
     func get(
-        _ id: ServiceID,
+        _ id: any ServiceID,
         logger: Logger? = nil
     ) throws -> Service? {
-        guard let state = states[id] else {
+        guard let state = states[id.rawId] else {
             return nil
         }
-        let logger = logger ?? .init(label: id.rawValue)
-        //        logger[metadataKey: "service-id"] = .string(id.string)
+        let logger = logger ?? .init(label: id.rawId)
 
         let config = ServiceConfig(
             context: state.context,
