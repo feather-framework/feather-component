@@ -1,5 +1,5 @@
 //
-//  MyServiceDriver.swift
+//  MyServiceBuilder.swift
 //  FeatherServiceTests
 //
 //  Created by Tibor Bödecs on 18/11/2023.
@@ -7,7 +7,7 @@
 
 import FeatherService
 
-struct MyServiceDriver: ServiceDriver {
+struct MyServiceBuilder: ServiceBuilder {
 
     /// NOTE: only add context if it is needed for shutdown or init
     let context: MyServiceContext
@@ -16,11 +16,11 @@ struct MyServiceDriver: ServiceDriver {
         self.context = context
     }
 
-    func run(using config: ServiceConfig) throws -> Service {
+    func build(using config: ServiceConfig) throws -> Service {
         MyServiceImplementation(config: config)
     }
 
     func shutdown() throws {
-        print(context.foo)
+        print("shutdown:", context.foo)
     }
 }

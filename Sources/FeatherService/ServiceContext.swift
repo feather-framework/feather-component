@@ -5,7 +5,11 @@
 //  Created by Tibor Bödecs on 18/11/2023.
 //
 
+/// Interface for custom service contexts
 public protocol ServiceContext: Sendable {
 
-    func createDriver() throws -> ServiceDriver
+    /// Makes a new ``ServiceBuilder`` object
+    ///
+    /// - returns: new ``ServiceBuilder`` object
+    func make() throws -> ServiceBuilder
 }

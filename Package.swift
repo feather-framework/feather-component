@@ -7,7 +7,8 @@ let package = Package(
         .macOS(.v13),
         .iOS(.v16),
         .tvOS(.v16),
-        .watchOS(.v9)
+        .watchOS(.v9),
+        .visionOS(.v1),
     ],
     products: [
         .library(name: "FeatherService", targets: ["FeatherService"]),

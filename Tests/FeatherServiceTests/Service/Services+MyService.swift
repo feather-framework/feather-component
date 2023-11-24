@@ -25,11 +25,11 @@ public enum MyServiceID: ServiceID {
 
 public extension ServiceRegistry {
 
-    func add(
-        _ contextFactoryBuilder: @autoclosure @escaping () -> ServiceContext,
+    func addMyService(
+        _ context: ServiceContext,
         id: MyServiceID = .default
     ) async throws {
-        try await add(.init { contextFactoryBuilder() }, id: id)
+        try await add(context, id: id)
     }
 
     func myService(
@@ -37,7 +37,7 @@ public extension ServiceRegistry {
         logger: Logger? = nil
     ) throws -> MyService {
         guard let storage = try get(id, logger: logger) as? MyService else {
-            fatalError("My service not found, use `add` to register.")
+            fatalError("My service not available, use `addMyService()` to register and `run()` before calling this function")
         }
         return storage
     }

@@ -5,8 +5,9 @@
 //  Created by Tibor Bödecs on 18/11/2023.
 //
 
-/// service identifier
+/// Service identifier
 public protocol ServiceID: Sendable, Hashable, Codable, Equatable {
 
+    /// Raw service identifier
     var rawId: String { get }
 }

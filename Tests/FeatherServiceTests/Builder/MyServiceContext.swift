@@ -11,7 +11,7 @@ struct MyServiceContext: ServiceContext {
 
     var foo: String
 
-    func createDriver() throws -> ServiceDriver {
-        MyServiceDriver(context: self)
+    func make() throws -> ServiceBuilder {
+        MyServiceBuilder(context: self)
     }
 }
