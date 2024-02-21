@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "feather-service",
+    name: "feather-component",
     platforms: [
         .macOS(.v13),
         .iOS(.v16),
@@ -11,22 +11,24 @@ let package = Package(
         .visionOS(.v1),
     ],
     products: [
-        .library(name: "FeatherService", targets: ["FeatherService"]),
+        .library(name: "FeatherComponent", targets: ["FeatherComponent"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-log", from: "1.5.0"),
+        .package(url: "https://github.com/apple/swift-log", from: "1.0.0"),
+        .package(url: "https://github.com/swift-server/swift-service-lifecycle", from: "2.0.0"),
     ],
     targets: [
         .target(
-            name: "FeatherService",
+            name: "FeatherComponent",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
+                .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
             ]
         ),
         .testTarget(
-            name: "FeatherServiceTests",
+            name: "FeatherComponentTests",
             dependencies: [
-                .target(name: "FeatherService"),
+                .target(name: "FeatherComponent"),
             ]
         ),
     ]

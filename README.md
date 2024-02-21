@@ -1,6 +1,6 @@
-# Feather Service
+# Feather Component
 
-The `FeatherService` library provides a basic mechanism to manage various Feather CMS related services.
+The `FeatherComponent` library provides a basic mechanism to manage various Feather CMS related components.
 
 ## Getting started
 
@@ -13,16 +13,16 @@ Use at your own risk.
 To add a dependency on the package, declare it in your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/feather-framework/feather-service", .upToNextMinor(from: "0.3.0")),
+.package(url: "https://github.com/feather-framework/feather-component", .upToNextMinor(from: "0.4.0")),
 ```
 
-and to your application target, add `FeatherService` to your dependencies:
+and to your application target, add `FeatherComponent` to your dependencies:
 
 ```swift
-.product(name: "FeatherService", package: "feather-service")
+.product(name: "FeatherComponent", package: "feather-component")
 ```
 
-Example `Package.swift` file with `FeatherService` as a dependency:
+Example `Package.swift` file with `FeatherComponent` as a dependency:
 
 ```swift
 // swift-tools-version:5.9
@@ -31,11 +31,11 @@ import PackageDescription
 let package = Package(
     name: "my-application",
     dependencies: [
-        .package(url: "https://github.com/feather-framework/feather-service", .upToNextMinor(from: "0.3.0")),
+        .package(url: "https://github.com/feather-framework/feather-component", .upToNextMinor(from: "0.4.0")),
     ],
     targets: [
         .target(name: "MyApplication", dependencies: [
-            .product(name: "FeatherService", package: "feather-service")
+            .product(name: "FeatherComponent", package: "feather-component")
         ]),
         .testTarget(name: "MyApplicationTests", dependencies: [
             .target(name: "MyApplication"),
@@ -44,7 +44,7 @@ let package = Package(
 )
 ```
 
-###  Using FeatherService
+###  Using FeatherComponent
 
-See the `FeatherServiceTests` target for a basic service implementation.
+See the `FeatherComponentTests` target for a basic component implementation.
 
