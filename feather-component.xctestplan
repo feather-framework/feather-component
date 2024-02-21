@@ -16,8 +16,8 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "FeatherServiceTests",
-        "name" : "FeatherServiceTests"
+        "identifier" : "FeatherComponentTests",
+        "name" : "FeatherComponentTests"
       }
     }
   ],
