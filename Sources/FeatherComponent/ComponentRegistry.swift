@@ -54,8 +54,13 @@ extension ComponentRegistry: Service {
                 try await run(id)
             }
         } onGracefulShutdown: {
-            Task.detached {
-                try await self.shutdown()
+            Task {
+                do {
+                    try await self.shutdown()
+                } 
+                catch {
+                    await self.logger.error("Shutdown error: \(error)")
+                }
             }
         }
     }
