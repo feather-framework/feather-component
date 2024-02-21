@@ -21,7 +21,7 @@ final class FeatherComponentTests: XCTestCase {
         )
 
         try await registry.run()
-        
+
         let isActive = await registry.isActive(MyComponentID.default)
         XCTAssertTrue(isActive)
         let isRegistryActive = await registry.isActive()
@@ -29,14 +29,14 @@ final class FeatherComponentTests: XCTestCase {
 
         var logger = Logger(label: "my-logger")
         logger.logLevel = .trace
-        
+
         let component = try await registry.myComponent()
-        
+
         XCTAssertEqual(component.test(), "test")
 
         try await registry.shutdown()
     }
-    
+
     func testComponentRegistry() async throws {
         let registry = ComponentRegistry()
 
@@ -51,10 +51,10 @@ final class FeatherComponentTests: XCTestCase {
         XCTAssertFalse(isActive)
         let isRegistryActive = await registry.isActive()
         XCTAssertFalse(isRegistryActive)
-        
+
         let ids = await registry.componentIdentifiers()
         XCTAssertEqual(ids.count, 1)
-        
+
         guard let componentId = ids[0] as? MyComponentID else {
             return XCTFail("Component id should be MyComponentID")
         }

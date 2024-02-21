@@ -37,7 +37,9 @@ public extension ComponentRegistry {
         logger: Logger? = nil
     ) throws -> MyComponent {
         guard let storage = try get(id, logger: logger) as? MyComponent else {
-            fatalError("My component not available, use `addMyComponent()` to register and `run()` before calling this function")
+            fatalError(
+                "My component not available, use `addMyComponent()` to register and `run()` before calling this function"
+            )
         }
         return storage
     }

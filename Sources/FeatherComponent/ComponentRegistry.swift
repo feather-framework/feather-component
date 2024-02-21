@@ -24,7 +24,7 @@ public final actor ComponentRegistry {
     private var isInActiveState: Bool
     private var states: [String: State]
     private var logger: Logger
-    
+
     /// Initializes the component registry
     ///
     /// - parameters:
@@ -57,7 +57,7 @@ extension ComponentRegistry: Service {
             Task {
                 do {
                     try await self.shutdown()
-                } 
+                }
                 catch {
                     await self.logger.error("Shutdown error: \(error)")
                 }
