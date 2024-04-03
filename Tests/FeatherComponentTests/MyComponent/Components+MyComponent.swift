@@ -23,22 +23,22 @@ public enum MyComponentID: ComponentID {
     }
 }
 
-public extension ComponentRegistry {
+extension ComponentRegistry {
 
-    func addMyComponent(
+    public func addMyComponent(
         _ context: ComponentContext,
         id: MyComponentID = .default
     ) async throws {
         try await add(context, id: id)
     }
 
-    func myComponent(
+    public func myComponent(
         _ id: MyComponentID = .default,
         logger: Logger? = nil
     ) throws -> MyComponent {
         guard let storage = try get(id, logger: logger) as? MyComponent else {
             fatalError(
-                "My component not available, use `addMyComponent()` to register and `run()` before calling this function"
+                "My component not available, use `addMyComponent()` to register before calling this function"
             )
         }
         return storage

@@ -11,7 +11,7 @@ struct MyComponentContext: ComponentContext {
 
     var foo: String
 
-    func make() throws -> ComponentBuilder {
-        MyComponentBuilder(context: self)
+    func make() throws -> ComponentFactory {
+        MyComponentFactory(context: self)
     }
 }

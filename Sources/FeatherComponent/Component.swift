@@ -7,15 +7,16 @@
 
 import Logging
 
-/// Interface for custom components
+/// Interface for custom components.
 public protocol Component: Sendable {
 
-    /// Component configuration
+    /// Component configuration.
     var config: ComponentConfig { get }
 }
 
-public extension Component {
+/// Logger related extension.
+extension Component {
 
-    /// Component logger
-    var logger: Logger { config.logger }
+    /// Component logger.
+    public var logger: Logger { config.logger }
 }
