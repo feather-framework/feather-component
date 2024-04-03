@@ -20,6 +20,3 @@ check:
 
 format:
 	./scripts/run-swift-format.sh --fix
-
-start-openapi-server:
-	./scripts/run-openapi-server.sh
