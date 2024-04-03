@@ -5,11 +5,11 @@
 //  Created by Tibor Bödecs on 18/11/2023.
 //
 
-/// Interface for custom component contexts
+/// Interface for custom component contexts.
 public protocol ComponentContext: Sendable {
 
-    /// Makes a new ``ComponentBuilder`` object
+    /// Makes a new ``ComponentFactory`` object.
     ///
-    /// - returns: new ``ComponentBuilder`` object
-    func make() throws -> ComponentBuilder
+    /// - returns: new ``ComponentFactory`` object
+    func make() throws -> ComponentFactory
 }

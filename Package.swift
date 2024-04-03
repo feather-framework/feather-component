@@ -15,14 +15,12 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-log", from: "1.0.0"),
-        .package(url: "https://github.com/swift-server/swift-service-lifecycle", from: "2.0.0"),
     ],
     targets: [
         .target(
             name: "FeatherComponent",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
             ]
         ),
         .testTarget(
